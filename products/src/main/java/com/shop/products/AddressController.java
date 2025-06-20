@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class AddressController {
@@ -17,11 +18,24 @@ public class AddressController {
   }
 
   @PostMapping("/addresses")
-  public Address post(@RequestBody Address address){
-    return repo.save(address);
+  public AddressDto post(
+          @RequestBody AddressDto dto
+  ){
+    var address = toAddress(dto);
+    repo.save(address);
+    return dto;
   }
+
+  private Address toAddress(AddressDto dto) {
+    return new Address(dto.name());
+  }
+
+  private AddressDto toAddressDto(Address address){
+    return new AddressDto(address.getName());
+  }
+
   @GetMapping("/addresses")
-  public List<Address> post(){
-    return repo.findAll();
+  public List<AddressDto> post(){
+    return repo.findAll().stream().map(this::toAddressDto).collect(Collectors.toList());
   }
 }

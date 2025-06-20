@@ -6,38 +6,36 @@ import java.util.List;
 
 @RestController
 public class CustomerController {
-
-  private final CustomerRepository repo;
-
-
-  public CustomerController(CustomerRepository repo) {
-    this.repo = repo;
+  public CustomerController(CustomerService customerService) {
+    this.customerService = customerService;
   }
 
+  private final CustomerService customerService;
 
   @PostMapping("/customers")
-  public Customer post(@RequestBody Customer customer){
-   return repo.save(customer);
+  public CustomerResponseDto saveCustomer(@RequestBody CustomerDto dto){
+      return customerService.saveCustomer(dto);
   }
 
   @GetMapping("/customers")
   public List<Customer> findAllCustomers(){
-    return repo.findAll();
+    return customerService.findAllCustomers();
   }
 
   @GetMapping("/customers/{cust-id}")
   public Customer findCustomersById(@PathVariable("cust-id") Integer id){
-    return repo.findById(id).orElse(null);
+
+    return customerService.findCustomersById(id);
   }
 
   @GetMapping("/customers/search/{cust-name}")
   public List<Customer> findCustomersByName(@PathVariable("cust-name") String name){
-    return repo.findAllByFirstnameLike(name);
+    return customerService.findCustomersByName(name);
   }
 
   @DeleteMapping("/customers/{cust-id}")
   public void delete(@PathVariable("cust-id") Integer id){
-    repo.deleteById(id);
+    customerService.delete(id);
   }
 
 }
