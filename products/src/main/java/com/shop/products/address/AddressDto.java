@@ -1,4 +1,4 @@
-package com.shop.products;
+package com.shop.products.address;
 
 public record AddressDto(String name) {
 }

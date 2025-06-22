@@ -1,4 +1,4 @@
-package com.shop.products;
+package com.shop.products.address;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

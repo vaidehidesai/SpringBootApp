@@ -1,5 +1,6 @@
-package com.shop.products;
+package com.shop.products.customer;
 
+import com.shop.products.address.Address;
 import org.springframework.stereotype.Service;
 
 @Service

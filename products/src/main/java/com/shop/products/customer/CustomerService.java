@@ -1,11 +1,9 @@
-package com.shop.products;
+package com.shop.products.customer;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
@@ -23,16 +21,16 @@ public class CustomerService {
     var savedCustomer = repo.save(cust);
     return customerMapper.toCustomerRsponseDto(savedCustomer);
   }
-  public List<Customer> findAllCustomers(){
-    return repo.findAll();
+  public List<CustomerResponseDto> findAllCustomers(){
+    return repo.findAll().stream().map(customerMapper::toCustomerRsponseDto).collect(Collectors.toList());
   }
-  public Customer findCustomersById(Integer id){
+  public CustomerResponseDto findCustomersById(Integer id){
 
-    return repo.findById(id).orElse(null);
+    return repo.findById(id).map(customerMapper::toCustomerRsponseDto).orElse(null);
   }
 
-  public List<Customer> findCustomersByName(String name){
-    return repo.findAllByFirstnameLike(name);
+  public List<CustomerResponseDto> findCustomersByName(String name){
+    return repo.findAllByFirstnameLike(name).stream().map(customerMapper::toCustomerRsponseDto).collect(Collectors.toList());
   }
 
   public void delete( Integer id){

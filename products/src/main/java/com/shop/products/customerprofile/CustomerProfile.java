@@ -1,5 +1,6 @@
-package com.shop.products;
+package com.shop.products.customerprofile;
 
+import com.shop.products.customer.Customer;
 import jakarta.persistence.*;
 
 @Entity

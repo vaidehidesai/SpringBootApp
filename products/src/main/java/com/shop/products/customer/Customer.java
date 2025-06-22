@@ -1,6 +1,8 @@
-package com.shop.products;
+package com.shop.products.customer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.shop.products.address.Address;
+import com.shop.products.customerprofile.CustomerProfile;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,6 +1,7 @@
-package com.shop.products;
+package com.shop.products.address;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.shop.products.customer.Customer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
