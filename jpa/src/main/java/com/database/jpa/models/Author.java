@@ -15,9 +15,9 @@ import java.util.List;
 public class Author extends BaseEntity{
 
 
-  private String firstname;
+  private String firstName;
 
-  private String lastname;
+  private String lastName;
   @Column(unique = true,nullable = false)
   private String email;
 
