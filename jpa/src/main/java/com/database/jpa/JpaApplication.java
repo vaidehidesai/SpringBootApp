@@ -1,13 +1,14 @@
 package com.database.jpa;
 
 import com.database.jpa.models.Author;
-import com.database.jpa.models.Video;
 import com.database.jpa.repositories.AuthorRepository;
 import com.database.jpa.repositories.VideoRepository;
+import com.database.jpa.specification.AuthorSpecification;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.domain.Specification;
 
 @SpringBootApplication
 public class JpaApplication {
@@ -28,7 +29,7 @@ public class JpaApplication {
 								.build();
 				repo.save(author);
 			}*/
-			var author = Author.builder()
+			/*var author = Author.builder()
 							.id(1)
 							.firstName("Gaurang")
 							.lastName("Desai")
@@ -37,13 +38,21 @@ public class JpaApplication {
 							.build();
 			//repo.save(author);
 
-			repo.updateAge(45,1);
+			//repo.updateAge(45,1);
+
+			// repo.findByNamedQuery(45).forEach(System.out::println);
 
 			/*var video = Video.builder()
 							.name("abc")
 							.length(7)
 							.build();
 			videoRepository.save(video);*/
+
+			Specification<Author> spec = Specification
+							.where(AuthorSpecification.hasAge(45)
+											.and(AuthorSpecification.firstnameContains("Va")));
+
+			repo.findAll(spec).forEach(System.out::println);
 		};
 
 	}
